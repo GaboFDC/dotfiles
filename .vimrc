@@ -147,7 +147,7 @@ au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
 au FileType html setlocal dict+=~/.vim/dict/javascript.dict
 au FileType html setlocal dict+=~/.vim/dict/css.dict
 
-"syntastic相关
+"syntastic
 execute pathogen#infect()
 let g:syntastic_python_checkers=['pylint']
 let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
@@ -157,7 +157,7 @@ let g:fencview_autodetect=0
 set rtp+=$GOROOT/misc/vim
 
 
-"markdown配置
+"markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
@@ -167,11 +167,11 @@ nmap fi :!firefox %.html & <CR><CR>
 nmap \ \cc
 vmap \ \cc
 
-"新建.c,.h,.sh,.java文件，自动插入文件头 
+"extension .c,.h,.sh,.java
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
-""定义函数SetTitle，自动插入文件头 
+""SetTitle, de acuerdo a extensión del archivo
 func SetTitle() 
-    "如果文件类型为.sh文件 
+    "bash files
     if &filetype == 'sh' 
         call setline(1,"\#!/bin/bash") 
         call append(line("."), "") 
@@ -214,15 +214,14 @@ func SetTitle()
         call append(line(".")+6,"public class ".expand("%:r"))
         call append(line(".")+7,"")
     endif
-    "新建文件后，自动定位到文件末尾
 endfunc 
 autocmd BufNewFile * normal G
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"其他东东
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"默认打开Taglist 
+" Verificar esto ->
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Taglist 
 let Tlist_Auto_Open=0 
 """""""""""""""""""""""""""""" 
 " Tag list (ctags) 
@@ -239,7 +238,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1  
 nmap tl :Tlist<cr>
 
-"python补全
+"python
 let g:pydiction_location = '~/.vim/after/complete-dict'
 let g:pydiction_menu_height = 20
 let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
