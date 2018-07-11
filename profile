@@ -12,12 +12,16 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 # Nice prompt
 PS1='\[\033[0;31m\]\t\[\033[0m\] \[\033[0;36m\] [\u@\h]\[\033[0m\]\[\033[0;34m\] \w \[\033[0m\] \$ '
 
+# Proper pager
+export PAGER=less
+export LESS="-iMSx4 -FX"
 
 ###############################################
 ##### Alias enhanced GaboFDC
 ### MAC
 alias ls='ls -G'
 alias ip='ifconfig -a'
+alias flushdns='sudo dscacheutil -flushcache'
 ### General
 alias ll="ls -lhA"
 alias diff='vimdiff'
