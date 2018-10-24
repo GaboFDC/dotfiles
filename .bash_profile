@@ -11,6 +11,7 @@ alias gp='git pull'
 alias gd='git diff'
 alias gc='git commit'
 alias gs='git status'
+alias gso='git show'
 alias gst='git stash'
 alias gpu='git push'
 alias gco='git checkout'
@@ -22,6 +23,7 @@ alias gpuoq='git push origin qa'
 __git_complete gc _git_commit
 __git_complete gp _git_pull
 __git_complete gd _git_diff
+__git_complete gso _git_show
 __git_complete gst _git_stash
 __git_complete gpu _git_push
 __git_complete gco _git_checkout
