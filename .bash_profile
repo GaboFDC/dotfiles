@@ -16,6 +16,7 @@ alias gst='git stash'
 alias gpu='git push'
 alias gco='git checkout'
 alias gb='git checkout -b'
+alias gcp='git cherry-pick'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gpuoq='git push origin qa'
@@ -28,3 +29,4 @@ __git_complete gso _git_show
 __git_complete gst _git_stash
 __git_complete gpu _git_push
 __git_complete gco _git_checkout
+__git_complete gcp _git_cherry_pick
