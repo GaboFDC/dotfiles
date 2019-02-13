@@ -21,6 +21,7 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gpuoq='git push origin qa'
 alias gll='git log  --oneline -n 10'
+alias glll='git log  --oneline -n 30'
 
 __git_complete gc _git_commit
 __git_complete gp _git_pull
