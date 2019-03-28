@@ -1,8 +1,8 @@
 #### My struff
 
 # Git
-source ~/DevOps/git-repos/dot-files/.remove_merged_branches
-source ~/DevOps/git-repos/dot-files/git-completion.bash
+source ~/GIT/dot-files/.remove_merged_branches
+source ~/GIT/dot-files/git-completion.bash
 
 alias g='git'
 alias ga='git add'
