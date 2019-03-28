@@ -22,6 +22,10 @@ export LESS="-iMSx4 -FX"
 alias ls='ls -G'
 alias ip='ifconfig -a'
 alias flushdns='sudo dscacheutil -flushcache'
+### Ubuntu
+alias apt-get='sudo apt-get'
+alias yum='sudo apt-get'
+alias dnf='sudo apt-get'
 ### General
 alias ll="ls -lhA"
 alias diff='vimdiff'
