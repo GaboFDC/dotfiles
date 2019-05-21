@@ -27,6 +27,7 @@ alias apt-get='sudo apt-get'
 alias yum='sudo apt-get'
 alias dnf='sudo apt-get'
 ### General
+alias ls='ls --color'
 alias ll="ls -lhA"
 alias diff='vimdiff'
 alias grep='egrep --color'
