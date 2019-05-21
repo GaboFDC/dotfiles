@@ -18,14 +18,21 @@ export LESS="-iMSx4 -FX"
 
 ###############################################
 ##### Alias enhanced GaboFDC
+source /etc/os-release
 ### MAC
-alias ls='ls -G'
-alias ip='ifconfig -a'
-alias flushdns='sudo dscacheutil -flushcache'
+if [ $ID == "mac" ]; then # Review
+    alias ls='ls -G'
+    alias ip='ifconfig -a'
+    alias flushdns='sudo dscacheutil -flushcache'
+fi
+
 ### Ubuntu
-alias apt-get='sudo apt-get'
-alias yum='sudo apt-get'
-alias dnf='sudo apt-get'
+if [ $ID == "ubuntu" ]; then # Review
+    alias apt-get='sudo apt-get'
+    alias yum='sudo apt-get'
+    alias dnf='sudo apt-get'
+fi
+
 ### General
 alias ls='ls --color'
 alias ll="ls -lhA"
