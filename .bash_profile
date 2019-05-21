@@ -31,3 +31,7 @@ __git_complete gst _git_stash
 __git_complete gpu _git_push
 __git_complete gco _git_checkout
 __git_complete gcp _git_cherry_pick
+
+
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global pull.rebase true
