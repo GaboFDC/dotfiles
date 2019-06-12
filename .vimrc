@@ -38,8 +38,6 @@ color ron
 set hlsearch
 set incsearch
 
-" Tabs to spcaes
-set et
 
 set showcmd
 
@@ -75,6 +73,7 @@ command W w !sudo tee % > /dev/null
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
+"set et
 
 " Be smart when using tabs ;)
 set smarttab
@@ -94,7 +93,6 @@ set tw=72
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
-set cindent" automatic C program indenting  
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -166,6 +164,10 @@ nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
 nmap fi :!firefox %.html & <CR><CR>
 nmap \ \cc
 vmap \ \cc
+
+" YAML
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "extension .c,.h,.sh,.java
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
