@@ -19,6 +19,21 @@ export LESS="-iMSx4 -FX"
 ###############################################
 ##### Alias enhanced GaboFDC
 source /etc/os-release
+
+### General
+alias ls='ls --color'
+alias ll="ls -lhA"
+alias diff='vimdiff'
+alias yum='sudo yum'
+alias grep='egrep --color'
+alias fastping='ping -c 100 -s.2'
+alias ports='netstat -tupanl'
+# Parenting changing perms on / #
+alias rsync='rsync -rav --progress --stats'
+alias myip='curl ifconfig.co'
+alias hhistory='history |awk -F'\'']'\'' {'\''print $2'\''} |uniq'
+alias stats='history | awk '\''{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}'\'' | grep -v "./" | column -c3 -s " " -t | sort -n'
+
 ### MAC
 if [ $ID == "mac" ]; then # Review
     alias ls='ls -G'
@@ -32,16 +47,3 @@ if [ $ID == "ubuntu" ]; then # Review
     alias yum='sudo apt-get'
     alias dnf='sudo apt-get'
 fi
-
-### General
-alias ls='ls --color'
-alias ll="ls -lhA"
-alias diff='vimdiff'
-alias grep='egrep --color'
-alias fastping='ping -c 100 -s.2'
-alias ports='netstat -tupanl'
-# Parenting changing perms on / #
-alias rsync='rsync -rav --progress --stats'
-alias myip='curl ifconfig.co'
-alias hhistory='history |awk -F'\'']'\'' {'\''print $2'\''} |uniq'
-alias stats='history | awk '\''{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}'\'' | grep -v "./" | column -c3 -s " " -t | sort -n'
