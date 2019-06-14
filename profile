@@ -43,7 +43,9 @@ fi
 
 ### Ubuntu
 if [ $ID == "ubuntu" ]; then # Review
-    alias apt-get='sudo apt-get'
+    alias pip='pip3'
+    alias apt='sudo apt'
     alias yum='sudo apt-get'
     alias dnf='sudo apt-get'
+    alias apt-get='sudo apt-get'
 fi
