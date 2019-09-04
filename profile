@@ -37,6 +37,7 @@ alias stats='history | awk '\''{CMD[$4]++;count++;}END { for (a in CMD)print CMD
 # Devel
 alias pireq='pip install -r requirements.txt'
 alias aenv='source .env/bin/activate'
+alias cdkfile='cdk synth > template-$(date +%F-%T).yml'
 
 ### MAC
 if [ $ID == "mac" ]; then # Review
