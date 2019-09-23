@@ -19,14 +19,40 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-#!/bin/bash
-
+echo "Updating..."
 sudo yum update -y
-sudo yum install -y vim git python36 gcc-c++ make cmake python3-devel
-python3.6 -m ensurepip --user
-curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
-sudo npm install -g pokemon-terminal diff-so-fancy
 
-# Vim-plug
+echo -e "\n\n\nInstallingi git, py, devel..."
+sudo yum install -y vim git python36 gcc-c++ make cmake python3-devel
+
+echo -e "\n\n\nInstalling pip..."
+python3.6 -m ensurepip --user
+
+echo -e "\n\n\nInstalling npm..."
+if type npm; then
+    echo "NPM already exists"
+else
+    curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+fi
+
+echo -e "\n\n\nInstalling fancy diff..."
+sudo npm install -g diff-so-fancy
+
+CURDIR=$(cd "$(dirname $BASH_SOURCE)"; pwd -P)
+echo -e "\n\n\n"
+read -n 1 -r -p "Create vim symlinks [ $CURDIR -> ~ ]? (y/N): "
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    ln -s $CURDIR/.vimrc ~
+    ln -s $CURDIR/.vim ~
+fi
+
+echo -e "\n\n\n"
+read -n 1 -r -p "Install pkmn terminal? (y/N): "
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    sudo npm install -g pokemon-terminal
+fi
+
+echo -e "\n\n\nInstalling vim plug..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
