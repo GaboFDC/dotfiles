@@ -21,6 +21,12 @@ set -o nounset                              # Treat unset variables as an error
 
 #!/bin/bash
 
-sudo yum install -y vim git python36 npm
+sudo yum update -y
+sudo yum install -y vim git python36 gcc-c++ make cmake python3-devel
 python3.6 -m ensurepip --user
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 sudo npm install -g pokemon-terminal diff-so-fancy
+
+# Vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
