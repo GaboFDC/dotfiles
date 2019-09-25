@@ -19,7 +19,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Cursor line and column
@@ -31,18 +31,15 @@ set ruler
 " No intro and shot messages
 set shortmess=atI
 
-"Colorscheme
-color ron
-
-" Highlight search results
+" Highlight search results and search on typing
 set hlsearch
 set incsearch
 
-
+" Show command in bottom bar
 set showcmd
 
 " Mantiene 3 lineas encima y debajo del cursor
-set scrolloff=3
+set scrolloff=4
 
 " Show matching brackets when text indicator is over them
 set showmatch
@@ -56,6 +53,15 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" Redraw only when we need to.
+set lazyredraw
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" Extra key for mapings
+let mapleader = ","
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -64,9 +70,12 @@ set nobackup
 set nowb
 set noswapfile
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -85,14 +94,15 @@ set tabstop=4
 
 " Line Numbers
 set number
-
-" Linebreak on 500 characters
-set lbr
-set tw=72
+nmap <leader>n :set rnu!<CR>
 
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
+
+""""""""""""""""""""""""""""""
+"  Moving, utils and others  "
+""""""""""""""""""""""""""""""
 
 " Remove trailing spaces
 autocmd BufWritePre * %s/\s\+$//e
@@ -102,6 +112,7 @@ autocmd BufReadPost *
    \ if line("'\"") > 0 && line("'\"") <= line("$") |
    \   exe "normal! g`\"" |
    \ endif
+
 " Remember info about open buffers on close
 set viminfo^=%
 set iskeyword+=_,$,@,%,#,-
@@ -125,9 +136,19 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
+" Turn persistent undo on
+try
+    set undodir=~/.vim_runtime/temp_dirs/undodir
+    set undofile
+catch
+endtry
+
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <c-space> ?
+
+" Useful mappings for managing tabs
+map <leader>t :tabnew<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -138,118 +159,100 @@ map <leader>ss :setlocal spell!<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-" Auto completion
-au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
-au FileType css setlocal dict+=~/.vim/dict/css.dict
-au FileType c setlocal dict+=~/.vim/dict/c.dict
-au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
-au FileType scale setlocal dict+=~/.vim/dict/scale.dict
-au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
-au FileType html setlocal dict+=~/.vim/dict/javascript.dict
-au FileType html setlocal dict+=~/.vim/dict/css.dict
-
-"syntastic
-execute pathogen#infect()
-let g:syntastic_python_checkers=['pylint']
-let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
-"golang
-"Processing... % (ctrl+c to stop)
-let g:fencview_autodetect=0
-set rtp+=$GOROOT/misc/vim
-
-
 "markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
-"rkdown to HTML  
+"rkdown to HTML
 nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
 nmap fi :!firefox %.html & <CR><CR>
 nmap \ \cc
 vmap \ \cc
 
 " YAML
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml "foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-"extension .c,.h,.sh,.java
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
-""SetTitle, de acuerdo a extensión del archivo
-func SetTitle() 
-    "bash files
-    if &filetype == 'sh' 
-        call setline(1,"\#!/bin/bash") 
-        call append(line("."), "") 
-    elseif &filetype == 'python'
-        call setline(1,"#!/usr/bin/env python")
-        call append(line("."),"# coding=utf-8")
-        call append(line(".")+1, "") 
-
-    elseif &filetype == 'ruby'
-        call setline(1,"#!/usr/bin/env ruby")
-        call append(line("."),"# encoding: utf-8")
-        call append(line(".")+1, "")
-
-"    elseif &filetype == 'mkd'
-"        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
-    else 
-        call setline(1, "/*************************************************************************") 
-        call append(line("."), "    > File Name: ".expand("%")) 
-        call append(line(".")+1, "  > Author: ") 
-        call append(line(".")+2, "  > Mail: ") 
-        call append(line(".")+3, "  > Created Time: ".strftime("%c")) 
-        call append(line(".")+4, " ************************************************************************/") 
-        call append(line(".")+5, "")
-    endif
-    if expand("%:e") == 'cpp'
-        call append(line(".")+6, "#include<iostream>")
-        call append(line(".")+7, "using namespace std;")
-        call append(line(".")+8, "")
-    endif
-    if &filetype == 'c'
-        call append(line(".")+6, "#include<stdio.h>")
-        call append(line(".")+7, "")
-    endif
-    if expand("%:e") == 'h'
-        call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
-        call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
-        call append(line(".")+8, "#endif")
-    endif
-    if &filetype == 'java'
-        call append(line(".")+6,"public class ".expand("%:r"))
-        call append(line(".")+7,"")
-    endif
-endfunc 
-autocmd BufNewFile * normal G
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Verificar esto ->
+" Python
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Taglist 
-let Tlist_Auto_Open=0 
-"""""""""""""""""""""""""""""" 
-" Tag list (ctags) 
-"""""""""""""""""""""""""""""""" 
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags' 
-let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
-let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
-" minibufexpl插件的一般设置
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1  
-nmap tl :Tlist<cr>
 
-"python
-let g:pydiction_location = '~/.vim/after/complete-dict'
-let g:pydiction_menu_height = 20
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+syntax enable
+set tw=90
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+let python_highlight_all = 1
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplModSelTarget = 1
+
+" python with virtualenv support
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                        Ansible                                         "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile *.yml set filetype=yaml.ansible
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vim-Plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" Py pep8 ident
+Plug 'vim-scripts/indentpython.vim'
+
+" Awesome semantic completer for py and other
+Plug 'valloric/youcompleteme'
+"map <space>g :tab split \| YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_goto_buffer_command = 'split-or-existing-window'
+map dt :tab YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+Plug 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_sh_checkers = ['bashate', 'sh']
+let g:syntastic_python_checkers = ['pylint', 'flake8']
+let g:syntastic_python_pylint_args = '--max-line-length=120 --disable=missing-docstring'
+let g:syntastic_python_flake8_args = '--max-line-length=120'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+
+"Plug 'nvie/vim-flake8'
+
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
+
+"Plug 'chriskempson/base16-vim'
+Plug 'whatyouhide/vim-gotham'
+
+" Initialize plugin system
+call plug#end()
+
+" Colors
+"colorscheme base16-default-dark
+"colorscheme gotham
