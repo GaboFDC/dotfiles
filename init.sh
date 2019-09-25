@@ -23,10 +23,12 @@ echo "Updating..."
 sudo yum update -y
 
 echo -e "\n\n\nInstallingi git, py, devel..."
-sudo yum install -y vim git python36 gcc-c++ make cmake python3-devel
-
+sudo yum install -y git python36 gcc-c++ make cmake python3-devel
+asd=`pwd`
 echo -e "\n\n\nInstalling pip..."
 python3.6 -m ensurepip --user
+
+pip3 install flake8 pylint ansible-lint bashate --user
 
 echo -e "\n\n\nInstalling npm..."
 if type npm; then
