@@ -228,7 +228,7 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'valloric/youcompleteme'
 "map <space>g :tab split \| YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_goto_buffer_command = 'split-or-existing-window'
-map dt :tab YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>g :tab YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
