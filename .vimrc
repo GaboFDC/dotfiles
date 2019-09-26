@@ -190,7 +190,7 @@ let python_highlight_all = 1
 "let g:miniBufExplModSelTarget = 1
 
 " python with virtualenv support
-py3 << EOF
+py << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
