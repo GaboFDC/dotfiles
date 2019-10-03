@@ -252,6 +252,8 @@ Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 "Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
 
+Plug 'jiangmiao/auto-pairs'
+
 " Initialize plugin system
 call plug#end()
 
