@@ -39,7 +39,7 @@ alias pireq='pip install -r requirements.txt'
 alias aenv='source .env/bin/activate'
 alias cdkfile='cdk synth > template-$(date +%F-%T).yml'
 cdkdeploy(){
-    cdk diff
+    cdk diff $@
     echo
     read -p "continue (y/N)"
     if [[ $REPLY =~ ^[Yy]$ ]]; then
