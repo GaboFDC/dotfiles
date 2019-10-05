@@ -28,6 +28,8 @@ alias yum='sudo yum'
 alias grep='egrep --color'
 alias fastping='ping -c 100 -s.2'
 alias ports='netstat -tupanl'
+alias ipcalc='/opt/ipcalc-0.41/ipcalc'
+
 # Parenting changing perms on / #
 alias rsync='rsync -rav --progress --stats'
 alias myip='curl ifconfig.co'

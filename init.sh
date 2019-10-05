@@ -22,9 +22,15 @@ set -o nounset                              # Treat unset variables as an error
 echo "Updating..."
 sudo yum update -y
 
-echo -e "\n\n\nInstallingi git, py, devel..."
+echo -e "\n\n\nInstalling git, py, devel..."
 sudo yum install -y git python36 gcc-c++ make cmake python3-devel
-asd=`pwd`
+
+
+echo -e "\n\n\nInstalling good ipcalc..."
+cd /opt/
+sudo wget http://jodies.de/ipcalc-archive/ipcalc-0.41.tar.gz
+sudo tar -xzvf ipcalc-0.41.tar.gz
+
 echo -e "\n\n\nInstalling pip..."
 python3.6 -m ensurepip --user
 
