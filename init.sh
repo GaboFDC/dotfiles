@@ -41,6 +41,7 @@ if type npm; then
     echo "NPM already exists"
 else
     curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+    sudo yum install nodejs -y
 fi
 
 echo -e "\n\n\nInstalling fancy diff..."
