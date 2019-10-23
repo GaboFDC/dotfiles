@@ -190,7 +190,8 @@ let python_highlight_all = 1
 "let g:miniBufExplModSelTarget = 1
 
 " python with virtualenv support
-py << EOF
+if has("python")
+    py << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
@@ -198,6 +199,7 @@ if 'VIRTUAL_ENV' in os.environ:
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   execfile(activate_this, dict(__file__=activate_this))
 EOF
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                        Ansible                                         "
