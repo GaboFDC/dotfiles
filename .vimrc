@@ -223,9 +223,6 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" Py pep8 ident
-Plug 'vim-scripts/indentpython.vim'
-
 " Awesome semantic completer for py and other
 Plug 'valloric/youcompleteme'
 "map <space>g :tab split \| YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -255,6 +252,8 @@ Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 Plug 'whatyouhide/vim-gotham'
 
 Plug 'jiangmiao/auto-pairs'
+
+Plug 'Vimjas/vim-python-pep8-indent'
 
 " Initialize plugin system
 call plug#end()
