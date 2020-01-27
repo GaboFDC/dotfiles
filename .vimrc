@@ -95,6 +95,7 @@ set tabstop=4
 " Line Numbers
 set number
 nmap <leader>n :set rnu!<CR>
+nmap <leader>m :set nonu!<CR>
 
 set ai "Auto indent
 set si "Smart indent
