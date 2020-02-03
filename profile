@@ -32,7 +32,7 @@ alias ipcalc='/opt/ipcalc-0.41/ipcalc'
 
 # Miss type
 alias grpe='grep'
-alais les='less'
+alias les='less'
 
 
 # Parenting changing perms on / #
