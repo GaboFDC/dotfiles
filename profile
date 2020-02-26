@@ -23,7 +23,7 @@ source /etc/os-release
 ### General
 alias ls='ls --color'
 alias ll="ls -lhA"
-alais lll='ls -lhatr'
+alias lll='ls -lhatr'
 alias diff='vimdiff'
 alias yum='sudo yum'
 alias grep='egrep --color'
