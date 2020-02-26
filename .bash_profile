@@ -4,13 +4,16 @@
 source ~/GIT/dot-files/.remove_merged_branches
 source ~/GIT/dot-files/git-completion.bash
 
+GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=60}
+
 alias g='git'
 alias ga='git add'
 alias gl='git log'
 alias gp='git pull'
 alias gd='git diff'
 alias gc='git commit'
-alias gs='git status'
+# Moved to funciton
+#alias gs='git status'
 alias gso='git show'
 alias gst='git stash'
 alias gpu='git push'
@@ -35,3 +38,27 @@ __git_complete gcp _git_cherry_pick
 
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global pull.rebase true
+
+# Autofetch function, called on cd and gs
+# Ref from https://github.com/ohmyzsh/ohmyzsh/pull/5477/files
+
+function auto_fetch {
+    dir=$(git rev-parse --git-dir 2>/dev/null)
+    last_fetch=$(date -r $dir/FETCH_LOG +%s 2>/dev/null || echo 0)
+    if [[ $dir ]] && (( `date +%s` - $last_fetch > $GIT_FETCH_INTERVAL )); then
+        git fetch --all &> $dir/FETCH_LOG &
+        sleep 3
+    fi
+}
+
+# cd and gs calls autofetch
+
+function cd {
+    builtin cd "$@"
+    auto_fetch
+}
+
+function gs {
+    auto_fetch
+    git status $@
+}
