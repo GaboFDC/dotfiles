@@ -4,7 +4,7 @@
 source ~/GIT/dot-files/.remove_merged_branches
 source ~/GIT/dot-files/git-completion.bash
 
-GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=60}
+GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=600}
 
 alias g='git'
 alias ga='git add'
