@@ -18,7 +18,8 @@ alias gso='git show'
 alias gst='git stash'
 alias gpu='git push'
 alias gco='git checkout'
-alias gb='git checkout -b'
+# Moved to funciton
+#alias gb='git checkout -b'
 alias gcp='git cherry-pick'
 alias gstl='git stash list'
 alias gstp='git stash pop'
@@ -61,4 +62,10 @@ function gs {
     auto_fetch
     sleep 3
     git status $@
+}
+
+# Git branch creation and setup upstream
+function gb {
+    git checkout -b "$@"
+    git push --set-upstream origin "$@"
 }
