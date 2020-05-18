@@ -27,9 +27,14 @@ sudo yum install -y git python36 gcc-c++ make cmake python3-devel
 
 
 echo -e "\n\n\nInstalling good ipcalc..."
-cd /opt/
-sudo wget http://jodies.de/ipcalc-archive/ipcalc-0.41.tar.gz
-sudo tar -xzvf ipcalc-0.41.tar.gz
+if [ -d /opt/ipcalc-0.41 ]; then
+    echo "ipcal already installed"
+else
+    cd /opt/
+    sudo wget http://jodies.de/ipcalc-archive/ipcalc-0.41.tar.gz
+    sudo tar -xzvf ipcalc-0.41.tar.gz
+    cd -
+fi
 
 echo -e "\n\n\nInstalling pip..."
 python3.6 -m ensurepip --user
@@ -53,7 +58,6 @@ read -n 1 -r -p "Create vim symlinks [ $CURDIR -> ~ ]? (y/N): "
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     ln -s $CURDIR/.vimrc ~
-    ln -s $CURDIR/.vim ~
 fi
 
 echo -e "\n\n\n"
