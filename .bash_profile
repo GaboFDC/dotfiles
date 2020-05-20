@@ -4,6 +4,9 @@
 source ~/GIT/dot-files/.remove_merged_branches
 source ~/GIT/dot-files/git-completion.bash
 
+# AWS CLI Completer
+complete -C 'aws_completer' aws
+
 GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=600}
 
 alias g='git'
