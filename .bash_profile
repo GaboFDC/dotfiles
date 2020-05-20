@@ -45,9 +45,9 @@ git config --global pull.rebase true
 
 function auto_fetch {
     dir=$(git rev-parse --git-dir 2>/dev/null)
-    last_fetch=$(date -r $dir/FETCH_LOG +%s 2>/dev/null || echo 0)
-    if [[ $dir ]] && (( `date +%s` - $last_fetch > $GIT_FETCH_INTERVAL )); then
-        git fetch --all &> $dir/FETCH_LOG &
+    last_fetch=$(date -r "$dir"/FETCH_LOG +%s 2>/dev/null || echo 0)
+    if [[ $dir ]] && (( $(date +%s) - last_fetch > GIT_FETCH_INTERVAL )); then
+        git fetch --all &> "$dir"/FETCH_LOG &
     fi
 }
 
@@ -61,7 +61,7 @@ function cd {
 function gs {
     auto_fetch
     sleep 3
-    git status $@
+    git status "$@"
 }
 
 # Git branch creation and setup upstream

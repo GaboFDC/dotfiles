@@ -48,23 +48,23 @@ alias nenv='python3 -m venv .env'
 alias aenv='source .env/bin/activate'
 alias cdkfile='cdk synth > template-$(date +%F-%T).yml'
 cdkdeploy(){
-    cdk diff $@
+    cdk diff "$@"
     echo
     read -p "continue (y/N)"
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        cdk deploy $@
+        cdk deploy "$@"
     fi
 }
 
 ### MAC
-if [ $ID == "mac" ]; then # Review
+if [ "$ID" == "mac" ]; then # Review
     alias ls='ls -G'
     alias ip='ifconfig -a'
     alias flushdns='sudo dscacheutil -flushcache'
 fi
 
 ### Ubuntu
-if [ $ID == "ubuntu" ]; then # Review
+if [ "$ID" == "ubuntu" ]; then # Review
     alias pip='pip3'
     alias apt='sudo apt'
     alias yum='sudo apt-get'
