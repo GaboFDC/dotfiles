@@ -25,6 +25,8 @@ sudo yum update -y
 echo -e "\n\n\nInstalling git, py, devel..."
 sudo yum install -y git python36 gcc-c++ make cmake python3-devel
 
+echo -e "\n\n\nInstalling git-completion..."
+wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 
 echo -e "\n\n\nInstalling good ipcalc..."
 if [ -d /opt/ipcalc-0.41 ]; then
