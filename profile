@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ###############################################
 # History enhanced GaboFDC
 export HISTTIMEFORMAT="[%F %T] "
@@ -18,6 +20,7 @@ export LESS="-iMSx4 -FX"
 
 ###############################################
 ##### Alias enhanced GaboFDC
+# shellcheck source=/dev/null
 source /etc/os-release
 
 ### General
@@ -39,9 +42,12 @@ alias les='less'
 # Parenting changing perms on / #
 alias rsync='rsync -rav --progress --stats'
 alias myip='curl ifconfig.co'
-alias hhistory='history |awk -F'\'']'\'' {'\''print $2'\''} |uniq'
-alias stats='history | awk '\''{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}'\'' | grep -v "./" | column -c3 -s " " -t | sort -n'
-
+function hhistory {
+    history |awk -F']' '{print $2}' |uniq
+}
+function stats {
+    history | awk '{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -n
+}
 # Devel
 alias pireq='pip install -r requirements.txt'
 alias nenv='python3 -m venv .env'
@@ -50,7 +56,7 @@ alias cdkfile='cdk synth > template-$(date +%F-%T).yml'
 cdkdeploy(){
     cdk diff "$@"
     echo
-    read -p "continue (y/N)"
+    read -rp "continue (y/N)"
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         cdk deploy "$@"
     fi

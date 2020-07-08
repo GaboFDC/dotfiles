@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function rmb () {
   current_branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 
@@ -25,13 +27,13 @@ function rmb () {
       echo "$local_branches"
     fi
 
-    read -p "Continue? (y/n): " -n 1 choice
+    read -rp "Continue? (y/n): " -n 1 choice
     echo
     if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
       # Remove remote branches
-      git push origin `git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | sed 's/origin\//:/g' | tr -d '\n'`
+      git push origin "$(git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | sed 's/origin\//:/g' | tr -d '\n')"
       # Remove local branches
-      git branch -d `git branch --merged | grep -v 'master$' | grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n'`
+      git branch -d "$(git branch --merged | grep -v 'master$' | grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n')"
     else
       echo "No branches removed."
     fi

@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/bash
 #===============================================================================
 #
 #          FILE: init.sh
@@ -32,10 +32,10 @@ echo -e "\n\n\nInstalling good ipcalc..."
 if [ -d /opt/ipcalc-0.41 ]; then
     echo "ipcal already installed"
 else
-    cd /opt/
+    cd /opt/ || exit
     sudo wget http://jodies.de/ipcalc-archive/ipcalc-0.41.tar.gz
     sudo tar -xzvf ipcalc-0.41.tar.gz
-    cd -
+    cd - || exit
 fi
 
 echo -e "\n\n\nInstalling pip..."
@@ -54,12 +54,12 @@ fi
 echo -e "\n\n\nInstalling fancy diff..."
 sudo npm install -g diff-so-fancy
 
-CURDIR=$(cd "$(dirname $BASH_SOURCE)"; pwd -P)
+CURDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" || exit; pwd -P)"
 echo -e "\n\n\n"
 read -n 1 -r -p "Create vim symlinks [ $CURDIR -> ~ ]? (y/N): "
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    ln -s $CURDIR/.vimrc ~
+    ln -s "$CURDIR"/.vimrc ~
 fi
 
 echo -e "\n\n\n"
@@ -70,4 +70,3 @@ fi
 
 echo -e "\n\n\nInstalling vim plug..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-

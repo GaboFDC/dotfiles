@@ -1,6 +1,8 @@
+#!/bin/bash
 #### My struff
 
 # Git
+# shellcheck source=/dev/null
 source ~/GIT/dot-files/.remove_merged_branches
 source ~/GIT/dot-files/git-completion.bash
 
@@ -58,7 +60,7 @@ function auto_fetch {
 # cd and gs calls autofetch
 
 function cd {
-    builtin cd "$@"
+    builtin cd "$@" || return
     auto_fetch
 }
 
