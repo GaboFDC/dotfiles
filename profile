@@ -29,6 +29,7 @@ alias ll="ls -lhA"
 alias lll='ls -lhatr'
 alias diff='vimdiff'
 alias yum='sudo yum'
+alias dnf='sudo dnf'
 alias grep='egrep --color'
 alias fastping='ping -c 100 -s.2'
 alias ports='netstat -tupanl'

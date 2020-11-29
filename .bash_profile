@@ -3,8 +3,8 @@
 
 # Git
 # shellcheck source=/dev/null
-source ~/GIT/dot-files/.remove_merged_branches
-source ~/GIT/dot-files/git-completion.bash
+source ~/GIT/dotfiles/.remove_merged_branches
+source ~/GIT/dotfiles/git-completion.bash
 
 # AWS CLI Completer
 complete -C 'aws_completer' aws
@@ -53,7 +53,8 @@ function auto_fetch {
     dir=$(git rev-parse --git-dir 2>/dev/null)
     last_fetch=$(date -r "$dir"/FETCH_LOG +%s 2>/dev/null || echo 0)
     if [[ $dir ]] && (( $(date +%s) - last_fetch > GIT_FETCH_INTERVAL )); then
-        git fetch --all &> "$dir"/FETCH_LOG &
+       git fetch --all &> "$dir"/FETCH_LOG &
+       sleep 3
     fi
 }
 
@@ -66,7 +67,6 @@ function cd {
 
 function gs {
     auto_fetch
-    sleep 3
     git status "$@"
 }
 

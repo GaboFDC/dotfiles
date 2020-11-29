@@ -23,13 +23,13 @@ echo "Updating..."
 sudo yum update -y
 
 echo -e "\n\n\nInstalling git, py, devel..."
-sudo yum install -y git python36 gcc-c++ make cmake python3-devel
+sudo yum install -y git python3 gcc-c++ make cmake python3-devel
 
 echo -e "\n\n\nInstalling git-completion..."
 wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 
 echo -e "\n\n\nInstalling good ipcalc..."
-if [ -d /opt/ipcalc-0.41 ]; then
+if [ -d /opt/ipcalc-0.41 ] || type ipcalc; then
     echo "ipcal already installed"
 else
     cd /opt/ || exit
@@ -39,9 +39,9 @@ else
 fi
 
 echo -e "\n\n\nInstalling pip..."
-python3.6 -m ensurepip --user
+python3 -m ensurepip --user
 
-pip3 install flake8 pylint ansible-lint bashate --user
+#pip3 install flake8 pylint ansible-lint bashate --user
 
 echo -e "\n\n\nInstalling npm..."
 if type npm; then
