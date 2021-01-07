@@ -1,6 +1,8 @@
 #!/bin/bash
 
 ###############################################
+# Default editor
+export EDITOR="vim"
 # History enhanced GaboFDC
 export HISTTIMEFORMAT="[%F %T] "
 export HISTFILESIZE=
