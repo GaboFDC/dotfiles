@@ -76,3 +76,17 @@ function gb {
     git checkout -b "$@"
     git push --set-upstream origin "$@"
 }
+
+# Play sound on long commands finish:
+if grep -qi Microsoft /proc/version; then
+    trap '_T=${_T:-$SECONDS}' DEBUG
+    PROMPT_COMMAND='
+        history -a; history -c; history -r;
+        ((SECONDS - _T > 300)) &&
+            { powershell.exe "[System.Console]::Beep(247,200);[System.Console]::Beep(220,200);[System.Console]::Beep(196,200);[System.Console]::Beep(220,200);[System.Console]::Beep(247,200);[System.Console]::Beep(247,200);[System.Console]::Beep(247,400);[System.Console]::Beep(220,200);[System.Console]::Beep(220,200);[System.Console]::Beep(220,400);;[System.Console]::Beep(247,200);[System.Console]::Beep(294,200);[System.Console]::Beep(294,400)";};
+        unset _T;
+    '
+fi
+
+# export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}; $PROMPT_COMMAND_SOUND"
+
