@@ -90,3 +90,7 @@ fi
 
 # export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}; $PROMPT_COMMAND_SOUND"
 
+# Daily fortune cookie
+MOOD="bdgpstwy"
+RAND_MOOD=${MOOD:$(shuf -i 0-$((${#MOOD}-1)) -n1):1}
+fortune | cowsay -n -$RAND_MOOD
