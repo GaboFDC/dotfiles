@@ -29,6 +29,7 @@ alias gcp='git cherry-pick'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gpuoq='git push origin qa'
+alias grs='git restore --staged'
 alias gll='git log  --oneline -n 10'
 alias glll='git log  --oneline -n 30'
 
