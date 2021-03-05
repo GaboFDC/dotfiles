@@ -23,7 +23,7 @@ echo "Updating..."
 sudo yum update -y
 
 echo -e "\n\n\nInstalling git, py, devel..."
-sudo yum install -y git python3 gcc-c++ make cmake python3-devel
+sudo yum install -y git python3 gcc-c++ make cmake python3-devel cowsay fortune-mod epel-release
 
 echo -e "\n\n\nInstalling git-completion..."
 wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
