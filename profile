@@ -53,6 +53,7 @@ function stats {
     history | awk '{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -n
 }
 # Devel
+alias tf='terraform'
 alias pireq='pip install -r requirements.txt'
 alias nenv='python3 -m venv .env'
 alias aenv='source .env/bin/activate'
