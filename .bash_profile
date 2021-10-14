@@ -12,37 +12,39 @@ complete -C 'aws_completer' aws
 GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=600}
 
 alias g='git'
+__git_complete g _git
 alias ga='git add'
+__git_complete ga _git_add
 alias gl='git log'
-alias gp='git pull'
-alias gd='git diff'
-alias gc='git commit'
-# Moved to funciton
-#alias gs='git status'
-alias gso='git show'
-alias gst='git stash'
-alias gpu='git push'
-alias gco='git checkout'
-# Moved to funciton
-#alias gb='git checkout -b'
-alias gcp='git cherry-pick'
-alias gstl='git stash list'
-alias gstp='git stash pop'
-alias gpuoq='git push origin qa'
-alias grs='git restore --staged'
 alias gll='git log  --oneline -n 10'
 alias glll='git log  --oneline -n 30'
-
-__git_complete gb _git_branch
+__git_complete gl _git_log
+alias gp='git pull'
 __git_complete gp _git_pull
+alias gd='git diff'
 __git_complete gd _git_diff
+alias gc='git commit'
 __git_complete gc _git_commit
-__git_complete gpu _git_push
+# Moved to funciton
+#alias gs='git status'
+__git_complete gs _git_status
+alias gso='git show'
 __git_complete gso _git_show
+alias gst='git stash'
+alias gstl='git stash list'
+alias gstp='git stash pop'
 __git_complete gst _git_stash
+alias gpu='git push'
+alias gpuoq='git push origin qa'
+__git_complete gpu _git_push
+alias gco='git checkout'
 __git_complete gco _git_checkout
+# Moved to funciton
+#alias gb='git checkout -b'
+#__git_complete gb _git_branch
+alias gcp='git cherry-pick'
 __git_complete gcp _git_cherry_pick
-
+alias grs='git restore --staged'
 
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global pull.rebase true
