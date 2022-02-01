@@ -41,7 +41,8 @@ alias gco='git checkout'
 __git_complete gco _git_checkout
 # Moved to funciton
 #alias gb='git checkout -b'
-#__git_complete gb _git_branch
+alias gbr='git branch'
+__git_complete gbr _git_branch
 alias gcp='git cherry-pick'
 __git_complete gcp _git_cherry_pick
 alias grs='git restore --staged'
