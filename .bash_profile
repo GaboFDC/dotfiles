@@ -79,6 +79,10 @@ function gb {
     git push --set-upstream origin "$@"
 }
 
+function hdu {
+    du -khsc "$@".[!.]*
+}
+
 # Play sound on long commands finish:
 if grep -qi Microsoft /proc/version; then
     trap '_T=${_T:-$SECONDS}' DEBUG
