@@ -1,0 +1,1 @@
+/home/wsl-unix-user/.bash_logout
