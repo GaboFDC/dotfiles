@@ -97,6 +97,12 @@ fi
 
 # export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}; $PROMPT_COMMAND_SOUND"
 
+# Load last directory
+function lastdir {
+    [ -s ~/.lastdirectory  ] && cd $(cat ~/.lastdirectory)
+}
+
+
 # Daily fortune cookie
 MOOD="bdgpstwy"
 RAND_MOOD=${MOOD:$(shuf -i 0-$((${#MOOD}-1)) -n1):1}
