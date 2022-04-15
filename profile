@@ -34,8 +34,9 @@ alias yum='sudo yum'
 alias dnf='sudo dnf'
 alias grep='egrep --color'
 alias pgrep='\grep --color -P'
-alias fastping='ping -c 100 -s.2'
+alias df='df -h -x squashfs'
 alias ports='netstat -tupanl'
+alias fastping='ping -c 100 -s.2'
 alias ipcalc='/opt/ipcalc-0.41/ipcalc'
 
 # Miss type
