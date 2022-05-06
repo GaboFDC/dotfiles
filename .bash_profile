@@ -11,6 +11,15 @@ complete -C 'aws_completer' aws
 
 GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=600}
 
+# tf
+complete -C /usr/bin/terraform terraform
+
+# k8s
+alias k=kubectl
+source <(kubectl completion bash)
+complete -F __start_kubectl k
+
+
 alias g='git'
 __git_complete g _git
 alias ga='git add'
@@ -81,7 +90,7 @@ function gb {
 }
 
 function hdu {
-    du -khsc "$@".[!.]*
+    sudo du -khsc "$@".[!.]*
 }
 
 # Play sound on long commands finish:
