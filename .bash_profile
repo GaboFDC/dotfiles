@@ -116,3 +116,4 @@ function lastdir {
 MOOD="bdgpstwy"
 RAND_MOOD=${MOOD:$(shuf -i 0-$((${#MOOD}-1)) -n1):1}
 fortune | cowsay -n -$RAND_MOOD
+lastdir
