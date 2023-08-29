@@ -2,6 +2,9 @@
 
 # Gabo backup history
 cp ~/.bash_history ~/.bash_history.bkp
+if [[ "$(stat -c%s ~/.bash_history.bkp)" -gt "$(stat -c%s ~/.bash_history.bkp.safe)" ]]; then
+    cp  ~/.bash_history.bkp ~/.bash_history.bkp.safe;
+fi
 
 # Gabo save directory on exit
 if [[ ! "$(pwd)" == *"VS Code"*  ]];then
