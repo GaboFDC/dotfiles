@@ -8,3 +8,4 @@ For vim run `:PlugInstall`
 - https://github.com/LazoCoder/Pokemon-Terminal
 - https://github.com/so-fancy/diff-so-fancy
 - https://github.com/ycm-core/YouCompleteMe#linux-64-bit
+- https://github.com/pyenv/pyenv/wiki#suggested-build-environment
