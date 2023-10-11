@@ -72,10 +72,20 @@ function auto_fetch {
 }
 
 # cd and gs calls autofetch
-
+# also, save cd history
 function cd {
+    pushd -n "$@" &> /dev/null
     builtin cd "$@" || return
     auto_fetch
+}
+
+# cd to old dir quickly
+function cdd {
+    if [[ $# -eq 1 && $1 =~ ^[0-9] ]]; then
+        cd $(dirs -l +$1)
+    else
+        echo "Wrong ussage. Use cdd N"
+    fi
 }
 
 function gs {
