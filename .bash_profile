@@ -32,7 +32,7 @@ alias gp='git pull'
 __git_complete gp _git_pull
 alias gd='git diff'
 __git_complete gd _git_diff
-alias gc='git commit'
+#alias gc='git commit'
 __git_complete gc _git_commit
 # Moved to funciton
 #alias gs='git status'
@@ -97,6 +97,20 @@ function gs {
 function gb {
     git checkout -b "$@"
     git push --set-upstream origin "$@"
+}
+
+# Count commit message lenght
+function gc {
+    if [[ $# -eq 2 && $1 == "-m" ]]; then
+        len=$(echo "$2" | wc -c)
+        echo "Commimt message lenght: $len"
+        read -p "Continue commit? (y/n): " cont
+        if [[ "$cont" != "y" ]]; then
+            echo "Aborting..."
+            return
+        fi
+    fi
+    git commit "$@"
 }
 
 function hdu {
