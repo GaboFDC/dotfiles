@@ -4,6 +4,11 @@
 cp ~/.bash_history ~/.bash_history.bkp
 if [[ "$(stat -c%s ~/.bash_history.bkp)" -gt "$(stat -c%s ~/.bash_history.bkp.safe)" ]]; then
     cp  ~/.bash_history.bkp ~/.bash_history.bkp.safe;
+else
+    for run in {1..10}; do
+        echo -e "\n\n .safe history not copied, please CHECK... \n\n"
+    done
+    sleep 15
 fi
 
 # Gabo save directory on exit
