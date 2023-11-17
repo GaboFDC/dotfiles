@@ -6,6 +6,11 @@
 source ~/GIT/dotfiles/.remove_merged_branches
 source ~/GIT/dotfiles/git-completion.bash
 
+# Podman > Docker
+alias docker='podman'
+alias d='podman'
+alias p='podman'
+
 # AWS CLI Completer
 complete -C 'aws_completer' aws
 
