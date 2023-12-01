@@ -79,7 +79,15 @@ function auto_fetch {
 # cd and gs calls autofetch
 # also, save cd history
 function cd {
-    pushd -n "$@" &> /dev/null
+    if [[ "$@" != "" ]]; then
+        REAL="$(realpath -Ls "$@")"
+        if [[ $REAL == "/mnt/c/Users/Gabriel_Diaz/OneDrive - EPAM/GIT/"* ]];then
+            D="${REAL/'/mnt/c/Users/Gabriel_Diaz/OneDrive - EPAM/GIT'/"/home/wsl/GIT"}"
+        else
+            D="$REAL"
+        fi
+        pushd -n $D &> /dev/null
+    fi
     builtin cd "$@" || return
     auto_fetch
 }
@@ -87,7 +95,7 @@ function cd {
 # cd to old dir quickly
 function cdd {
     if [[ $# -eq 1 && $1 =~ ^[0-9] ]]; then
-        cd $(dirs -l +$1)
+        cd "$(dirs -l +$1)"
     else
         echo "Wrong ussage. Use cdd N"
     fi
