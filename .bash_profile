@@ -38,6 +38,7 @@ __git_complete gp _git_pull
 alias gd='git diff'
 __git_complete gd _git_diff
 #alias gc='git commit'
+alias gca='git commit --amend --no-edit'
 __git_complete gc _git_commit
 # Moved to funciton
 #alias gs='git status'
