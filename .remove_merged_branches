@@ -3,16 +3,16 @@
 function rmb () {
   current_branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 
-  if [ "$current_branch" != "master" ]; then
-    echo "WARNING: You are on branch $current_branch, NOT master."
+  if [ "$current_branch" != "main" ]; then
+    echo "WARNING: You are on branch $current_branch, NOT main."
   fi
 
   echo "Fetching merged branches..."
 
   git remote prune origin
 
-  remote_branches=$(git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$")
-  local_branches=$(git branch --merged | grep -v 'master$' | grep -v "$current_branch$")
+  remote_branches=$(git branch -r --merged | grep -v '/main$' | grep -v "/$current_branch$")
+  local_branches=$(git branch --merged | grep -v 'main$' | grep -v "$current_branch$")
 
   if [ -z "$remote_branches" ] && [ -z "$local_branches" ]; then
     echo "No existing branches have been merged into $current_branch."
@@ -27,15 +27,21 @@ function rmb () {
       echo "$local_branches"
     fi
 
-    read -rp "Continue? (y/n): " -n 1 choice
+    read -rp "Remove all remote branches? (y/n): " -n 1 choice
     echo
     if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
       # Remove remote branches
-      git push origin "$(git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | sed 's/origin\//:/g' | tr -d '\n')"
-      # Remove local branches
-      git branch -d "$(git branch --merged | grep -v 'master$' | grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n')"
+      git push origin "$(git branch -r --merged | grep -v '/main$' | grep -v "/$current_branch$" | sed 's/origin\//:/g' | tr -d '\n')"
     else
-      echo "No branches removed."
+      echo "No remote branches removed."
+    fi
+    read -rp "Remove all local branches? (y/n): " -n 1 choice
+    echo
+    if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+      # Remove local branches
+      git branch -d $(git branch --merged | grep -v 'main$' | grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n' | sed 's/^  //g')
+    else
+      echo "No local branches removed."
     fi
   fi
 }
