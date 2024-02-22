@@ -14,7 +14,8 @@ alias p='podman'
 # AWS CLI Completer
 complete -C 'aws_completer' aws
 
-GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=600}
+# In Seconds. Default 60 Mins
+GIT_FETCH_INTERVAL=${GIT_FETCH_INTERVAL:=3600}
 
 # tf
 complete -C /usr/bin/terraform terraform
@@ -80,7 +81,7 @@ function auto_fetch {
 # cd and gs calls autofetch
 # also, save cd history
 function cd {
-    if [[ "$@" != "" ]]; then
+    if [[ "$@" != "" && "$@" != "-" ]]; then
         REAL="$(realpath -Ls "$@")"
         if [[ $REAL == "/mnt/c/Users/Gabriel_Diaz/OneDrive - EPAM/GIT/"* ]];then
             D="${REAL/'/mnt/c/Users/Gabriel_Diaz/OneDrive - EPAM/GIT'/"/home/wsl/GIT"}"
