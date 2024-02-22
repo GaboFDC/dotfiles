@@ -128,31 +128,44 @@ function gc {
     git commit "$@"
 }
 
+# Change current pwd to use synlink if exists
+function lnswitch {
+    for link in $(sudo find ~ -type l -not -path '*/.*'); do
+        DEST="$(readlink -f $link)"
+        if [[ $PWD == $DEST* ]]; then
+            cd ${PWD/$DEST/$link}
+        fi
+    done
+}
+
 function hdu {
     sudo du -khsc "$@".[!.]*
 }
 
+# Save working dir for windows terminal
+PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$PWD"'
+
+
 # Play sound on long commands finish:
 if grep -qi Microsoft /proc/version; then
     trap '_T=${_T:-$SECONDS}' DEBUG
-    PROMPT_COMMAND='
-        history -a; history -c; history -r;
+    PROMPT_COMMAND_SOUND='
         ((SECONDS - _T > 300)) &&
             { powershell.exe "[System.Console]::Beep(247,200);[System.Console]::Beep(220,200);[System.Console]::Beep(196,200);[System.Console]::Beep(220,200);[System.Console]::Beep(247,200);[System.Console]::Beep(247,200);[System.Console]::Beep(247,400);[System.Console]::Beep(220,200);[System.Console]::Beep(220,200);[System.Console]::Beep(220,400);;[System.Console]::Beep(247,200);[System.Console]::Beep(294,200);[System.Console]::Beep(294,400)";};
-        unset _T;
+        unset _T
     '
 fi
 
-# export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}; $PROMPT_COMMAND_SOUND"
+export PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}"$PROMPT_COMMAND_SOUND"
 
 # Load last directory
-function lastdir {
-    [ -s ~/.lastdirectory  ] && cd $(cat ~/.lastdirectory)
-}
+#function lastdir {
+#    [ -s ~/.lastdirectory  ] && cd $(cat ~/.lastdirectory)
+#}
 
 
 # Daily fortune cookie
 MOOD="bdgpstwy"
 RAND_MOOD=${MOOD:$(shuf -i 0-$((${#MOOD}-1)) -n1):1}
 fortune | cowsay -n -$RAND_MOOD
-lastdir
+#lastdir
