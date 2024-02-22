@@ -14,7 +14,7 @@ shopt -s histappend
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # Nice prompt
-PS1='\[\033[0;31m\]\t\[\033[0m\] \[\033[0;36m\] [\u@\h]\[\033[0m\]\[\033[0;34m\] \w \[\033[0m\] \$ '
+PS1='\[\e]0;\u@\h: \w\a\] \[\033[0;31m\]\t\[\033[0m\] \[\033[0;36m\] [\u@\h]\[\033[0m\]\[\033[0;34m\] \w \[\033[0m\] \$ '
 
 # Proper pager
 export PAGER=less
@@ -37,7 +37,7 @@ alias pgrep='\grep --color -P'
 alias df='df -h -x squashfs'
 alias ports='netstat -tupanl'
 alias fastping='ping -c 100 -s.2'
-alias ipcalc='/opt/ipcalc-0.41/ipcalc'
+#alias ipcalc='/opt/ipcalc-0.41/ipcalc'
 
 # Miss type
 alias grpe='grep'
