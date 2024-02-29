@@ -42,6 +42,7 @@ alias fastping='ping -c 100 -s.2'
 # Miss type
 alias grpe='grep'
 alias les='less'
+alias sduo='sudo'
 
 
 # Parenting changing perms on / #
