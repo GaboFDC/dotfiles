@@ -4,7 +4,8 @@
 # Git
 # shellcheck source=/dev/null
 source ~/GIT/dotfiles/.remove_merged_branches
-source ~/GIT/dotfiles/git-completion.bash
+#source ~/GIT/dotfiles/git-completion.bash
+source  /usr/share/bash-completion/completions/git # Ubuntu path
 
 # Podman > Docker
 alias docker='podman'
@@ -27,7 +28,7 @@ complete -F __start_kubectl k
 
 
 alias g='git'
-__git_complete g _git
+__git_complete g _git_main
 alias ga='git add'
 __git_complete ga _git_add
 alias gl='git log'
