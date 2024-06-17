@@ -63,8 +63,6 @@ alias gcp='git cherry-pick'
 __git_complete gcp _git_cherry_pick
 alias grs='git restore --staged'
 
-git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
-git config --global pull.rebase true
 
 # Autofetch function, called on cd and gs
 # Ref from https://github.com/ohmyzsh/ohmyzsh/pull/5477/files

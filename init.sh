@@ -78,3 +78,8 @@ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 
+
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global pull.rebase true
+git config --global init.defaultBranch main
+
