@@ -94,10 +94,12 @@ function cd {
     auto_fetch
 }
 
+# Nicer dirs for long paths
+alias dirs='dirs | tr " " "\n" | nl -v 0'
 # cd to old dir quickly
 function cdd {
     if [[ $# -eq 1 && $1 =~ ^[0-9] ]]; then
-        cd "$(dirs -l +$1)"
+        cd "$(\dirs -l +$1)"
     else
         echo "Wrong ussage. Use cdd N"
     fi
