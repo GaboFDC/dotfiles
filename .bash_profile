@@ -63,6 +63,8 @@ __git_complete gbr _git_branch
 alias gcp='git cherry-pick'
 __git_complete gcp _git_cherry_pick
 alias grs='git restore --staged'
+alias gcl='git clone'
+__git_complete gcl _git_clone
 
 
 # Autofetch function, called on cd and gs
