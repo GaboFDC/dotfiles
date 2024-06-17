@@ -1,5 +1,8 @@
 # ~/.bash_logout: executed by bash(1) when login shell exits.
 
+# Stop trunk on out
+trunk daemon shutdown
+
 # Gabo backup history
 cp ~/.bash_history ~/.bash_history.bkp
 if [[ "$(stat -c%s ~/.bash_history.bkp)" -gt "$(stat -c%s ~/.bash_history.bkp.safe)" ]]; then
