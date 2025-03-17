@@ -124,7 +124,7 @@ function gb {
 function gc {
     if [[ $# -eq 2 && $1 == "-m" ]]; then
         len=$(echo "$2" | wc -c)
-        echo "Commimt message lenght: $len"
+        echo "Commit message lenght: $len"
         read -p "Continue commit? (y/n): " cont
         if [[ "$cont" != "y" ]]; then
             echo "Aborting..."
