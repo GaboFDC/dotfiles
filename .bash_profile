@@ -29,6 +29,7 @@ complete -F __start_kubectl k
 # Safe CMDs
 alias cp='cp -n'
 alias rm='rm -i'
+alias mv='mv -i'
 
 alias g='git'
 __git_complete g _git_main
