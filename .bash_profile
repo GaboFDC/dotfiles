@@ -71,11 +71,26 @@ alias gcl='git clone'
 __git_complete gcl _git_clone
 
 
+# Check if dir is git
+function is_git {
+    git rev-parse --git-dir 2>/dev/null
+}
+
+# Show stash list on git dirs
+function list_stash {
+    dir=$(is_git)
+    if [[ $dir ]]; then
+        stash=$(gstl)
+        if [[ $stash ]]; then
+            echo -e "Don't forget to check your stash 😏😏\n$stash"
+        fi
+    fi
+}
+
 # Autofetch function, called on cd and gs
 # Ref from https://github.com/ohmyzsh/ohmyzsh/pull/5477/files
-
 function auto_fetch {
-    dir=$(git rev-parse --git-dir 2>/dev/null)
+    dir=$(is_git)
     last_fetch=$(date -r "$dir"/FETCH_LOG +%s 2>/dev/null || echo 0)
     if [[ $dir ]] && (( $(date +%s) - last_fetch > GIT_FETCH_INTERVAL )); then
        git fetch --all &> "$dir"/FETCH_LOG &
@@ -97,6 +112,7 @@ function cd {
     fi
     builtin cd "$@" || return
     auto_fetch
+    list_stash
 }
 
 # Nicer dirs for long paths
